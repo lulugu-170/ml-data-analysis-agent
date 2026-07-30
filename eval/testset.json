@@ -1,0 +1,50 @@
+[
+  {
+    "id": "total_gmv",
+    "question": "所有订单的总 GMV（总销售额）是多少？",
+    "truth_sql": "SELECT ROUND(SUM(amount), 2) FROM orders",
+    "kind": "number"
+  },
+  {
+    "id": "order_count",
+    "question": "一共有多少条订单？",
+    "truth_sql": "SELECT COUNT(*) FROM orders",
+    "kind": "number"
+  },
+  {
+    "id": "user_count",
+    "question": "一共有多少个不同的用户下过单？",
+    "truth_sql": "SELECT COUNT(DISTINCT user_id) FROM orders",
+    "kind": "number"
+  },
+  {
+    "id": "repurchase_pct",
+    "question": "复购订单（is_repurchase=1）占全部订单的比例是多少（百分比）？",
+    "truth_sql": "SELECT ROUND(100.0 * SUM(is_repurchase) / COUNT(*), 2) FROM orders",
+    "kind": "number"
+  },
+  {
+    "id": "top_gmv_category",
+    "question": "哪个品类的总 GMV 最高？",
+    "truth_sql": "SELECT category FROM orders GROUP BY category ORDER BY SUM(amount) DESC LIMIT 1",
+    "kind": "string"
+  },
+  {
+    "id": "top_aov_category",
+    "question": "哪个品类的客单价（平均订单金额）最高？",
+    "truth_sql": "SELECT category FROM orders GROUP BY category ORDER BY AVG(amount) DESC LIMIT 1",
+    "kind": "string"
+  },
+  {
+    "id": "digital_order_count",
+    "question": "数码品类一共有多少条订单？",
+    "truth_sql": "SELECT COUNT(*) FROM orders WHERE category = '数码'",
+    "kind": "number"
+  },
+  {
+    "id": "max_order_count_category",
+    "question": "订单数量最多的品类是哪个？",
+    "truth_sql": "SELECT category FROM orders GROUP BY category ORDER BY COUNT(*) DESC LIMIT 1",
+    "kind": "string"
+  }
+]

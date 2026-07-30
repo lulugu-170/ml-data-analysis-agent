@@ -1,0 +1,50 @@
+[
+  {
+    "term": "订单数量",
+    "aliases": ["订单数", "单量", "订单条数", "多少条订单", "多少单", "订单量"],
+    "definition": "订单的条数，一行订单记一条。",
+    "sql_hint": "使用 COUNT(*) 统计，不要用 SUM(amount)。"
+  },
+  {
+    "term": "GMV",
+    "aliases": ["销售额", "成交额", "总销售额", "总金额", "交易额", "营业额"],
+    "definition": "成交总金额，即订单金额之和。",
+    "sql_hint": "使用 SUM(amount) 统计。"
+  },
+  {
+    "term": "客单价",
+    "aliases": ["平均订单金额", "平均客单", "单均金额", "平均消费"],
+    "definition": "平均每笔订单的金额。",
+    "sql_hint": "使用 AVG(amount) 统计。"
+  },
+  {
+    "term": "复购率",
+    "aliases": ["复购占比", "复购比例", "复购订单占比"],
+    "definition": "复购订单占全部订单的比例。复购订单指 is_repurchase = 1。",
+    "sql_hint": "使用 100.0 * SUM(is_repurchase) / COUNT(*) 计算百分比。"
+  },
+  {
+    "term": "用户数",
+    "aliases": ["买家数", "下单用户数", "不同用户", "多少用户", "多少个用户", "去重用户"],
+    "definition": "下过单的不同用户数量。",
+    "sql_hint": "使用 COUNT(DISTINCT user_id)。"
+  },
+  {
+    "term": "品类",
+    "aliases": ["类目", "分类", "category"],
+    "definition": "商品品类，对应字段 category（美妆/服饰/食品/家居/数码/母婴）。",
+    "sql_hint": "按品类分析时 GROUP BY category。"
+  },
+  {
+    "term": "复购订单",
+    "aliases": ["复购", "二次购买", "重复购买"],
+    "definition": "同一用户的非首次订单，对应字段 is_repurchase = 1。",
+    "sql_hint": "筛选 WHERE is_repurchase = 1。"
+  },
+  {
+    "term": "下单时间",
+    "aliases": ["订单日期", "时间", "日期", "按月", "按天", "趋势"],
+    "definition": "订单发生日期，字段 order_date，格式 YYYY-MM-DD。",
+    "sql_hint": "按月统计可用 substr(order_date, 1, 7) 分组。"
+  }
+]
